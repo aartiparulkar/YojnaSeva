@@ -7,7 +7,7 @@ const EligibilityForm = () => {
 
   return (
     <div className="eligibility-container">
-      <button className="back-btn" onClick={() => navigate("/")}>⬅ Back to Home</button>
+      <button className="back-btn" onClick={() => navigate("/home")}>⬅ Back to Home</button>
 
       <h2>Check Your Eligibility</h2>
 
