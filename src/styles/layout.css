@@ -1,0 +1,160 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: linear-gradient(45deg, #009688, black);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  flex-grow: 1; /* Allow navbar to take available space */
+  display: flex;
+  justify-content: center; /* Center the navbar */
+  background: #6D9886;
+  color: #F2E7D5;
+  padding: 10px 0;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 20px; /* Add spacing between nav links */
+  list-style: none;
+  padding: 0;
+  margin-left: 20px;
+}
+
+.navbar ul li {
+  display: inline-block;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  padding: 10px 15px;
+  transition: color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+  color: #007bff;
+}
+
+/* User Profile Button */
+.user-profile-container {
+  position: relative;
+  display: inline-block;
+}
+
+.user-profile {
+  margin-left: 40px;
+  width: 40px;
+  height: 40px;
+  background: #333;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.user-profile:hover {
+  background: #222;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Dropdown Menu */
+.user-menu {
+  margin-left: 40px;
+  position: absolute;
+  top: 45px; 
+  left: 50%;
+  transform: translateX(-50%); /* Centers it exactly under the avatar */
+  background: #222;
+  color: white;
+  width: 180px;
+  padding: 0;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+/* Ensure dropdown items are vertical */
+.user-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; 
+}
+
+.user-menu li {
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  display: block; 
+  /* padding: 8px 12px; */
+  font-size: 12px;
+  margin: 0;
+}
+
+.user-menu li:hover {
+  background: #333;
+}
+
+/* Divider */
+.user-menu hr {
+  border: none;
+  height: 1px;
+  background: #555;
+  width: 100%;
+}
+
+/* Link Styling */
+.user-menu ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 12px;
+  display: block;
+  width: 100%;
+  transition: background 0.3s ease-in-out;
+}
+
+.user-menu ul li a:hover {
+  background: #444;
+}
+
+/* Logout Button */
+.user-menu .logout {
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  font-size: 12px;
+  text-align: left;
+}
+
+.user-menu .logout:hover {
+  background: #400;
+  color: white;
+}

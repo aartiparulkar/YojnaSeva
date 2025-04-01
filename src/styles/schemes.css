@@ -1,0 +1,41 @@
+/* Schemes Section */
+.schemes-section {
+    padding: 50px;
+  }
+  
+  .schemes-title {
+    font-size: 28px;
+    color: #0057b8;
+  }
+  
+  .schemes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+  }
+  
+  .scheme-card {
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+  }
+  
+  .scheme-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .scheme-card h3 {
+    color: black;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .scheme-card p {
+    color: black;
+    font-size: 16px;
+    line-height: 1.5;
+  }
