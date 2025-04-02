@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import "../styles/about.css";
 
-const About = () => {
+const About = ({ userName}) => {
   return (
     <Layout>
       <section className="about-section">

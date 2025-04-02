@@ -6,6 +6,7 @@ import Schemes from "./pages/Scheme";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import EligibilityForm from "./pages/Eligibility"; 
+import Layout from "./components/Layout";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route path="/schemes" element={<Schemes />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/eligibility" element={<EligibilityForm />} />
+        <Route path="/eligibility" element={ <Layout><EligibilityForm /></Layout> } />
       </Routes>
     </Router>
   );

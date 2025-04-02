@@ -4,8 +4,9 @@ import c1 from "../assets/c1.jpg";
 import c2 from "../assets/c2.jpg";
 import c3 from "../assets/c3.jpg";
 import "../styles/home.css";
+import "../styles/style.css"
 
-const Home = () => {
+const Home = ({ userName }) => {
   return (
     <Layout>
 

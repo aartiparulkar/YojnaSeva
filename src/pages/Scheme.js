@@ -2,8 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
 import Layout from "../components/Layout";
 import "../styles/schemes.css";
+import "../styles/style.css";
 
-const Schemes = () => {
+
+const Schemes = ({userName}) => {
   const navigate = useNavigate(); // ✅ Call useNavigate inside the component
 
   const schemesData = [
@@ -48,7 +50,9 @@ const Schemes = () => {
       </section>
 
       {/* ✅ Use the navigate function inside onClick */}
-      <button onClick={() => navigate("/eligibility")}>Explore All Schemes</button>
+      <center>
+        <button className="explore-btn" onClick={() => navigate("/eligibility")}>Check Eligibility</button>
+      </center>
     </Layout>
   );
 };

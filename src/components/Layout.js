@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/layout.css";
-import AuthPage from "../pages/Login";
 
 const Layout = ({ children }) => {
   const navigate = useNavigate();
@@ -35,6 +34,7 @@ const Layout = ({ children }) => {
     fetchUserData();
   }, []);
 
+  console.log("Username in Layout.js: ", userName)
   const userInitial = userName ? userName.charAt(0).toUpperCase() : "?";
 
   // Toggle User Menu
@@ -91,7 +91,11 @@ const Layout = ({ children }) => {
         </div>
       </header>
 
-      <main>{children}</main>
+      <main>
+        {React.Children.map(children, (child) =>
+          React.isValidElement(child) ? React.cloneElement(child, { userName }) : child
+        )}
+      </main>
 
       <footer className="footer">
         <p>&copy; 2025 SevaYojana. All Rights Reserved.</p>

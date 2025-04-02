@@ -1,6 +1,5 @@
 /* Background with gradient */
 .eligibility-container {
-    background: linear-gradient(to right, rgb(0, 0, 0), black);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -117,3 +116,8 @@
     }
   }
   
+  .error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+  }

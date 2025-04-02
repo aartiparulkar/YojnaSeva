@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const axios = require("axios");
+
 
 const authRoutes = require("./routes/authRoutes");
 
@@ -15,7 +17,20 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log("MongoDB Connection Error:", err));
 
+  // Use Auth Routes
 app.use("/api/auth", authRoutes);
 
-const PORT = process.env.PORT || 5000;
+
+// Prediction Route
+app.post("/predict", async (req, res) => {
+    try {
+        const response = await axios.post("http://127.0.0.1:5000/predict", req.body);
+        res.json(response.data);
+    } catch (error) {
+        console.error("Prediction Error: ", error.message || error);
+        res.status(500).json({ error: "Prediction failed" });
+    }
+});
+
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

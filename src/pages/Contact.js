@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import "../styles/contact.css";
 
-const Contact = () => {
+const Contact = ({ userName }) => {
   return (
     <Layout>
       <section className="contact-section">
