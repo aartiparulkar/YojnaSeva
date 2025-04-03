@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import EligibilityForm from "./pages/Eligibility"; 
 import Layout from "./components/Layout";
+import SchemesPage from "./pages/RecommendSchemes";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/eligibility" element={ <Layout><EligibilityForm /></Layout> } />
+        <Route path="/login" element={ <Login /> } />
+        <Route path="/recommended_schemes" element={<SchemesPage />} />
       </Routes>
     </Router>
   );

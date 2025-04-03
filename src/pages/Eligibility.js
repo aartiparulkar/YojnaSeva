@@ -14,136 +14,160 @@ const statesList = [
 ];
 
 const EligibilityForm = ({ userName }) => {
-  console.log("Username in Eligibility.js: ", userName)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    fullName: userName,
+    fullName: "",
     contact: "",
     aadhar: "",
-    disabilityPercentage: "",
-    disabilityType: "",
-    income: "",
-    age: "",
-    state: "",
+    "Disability Percentage": 0,
+    "Annual Income": 0,
+    "Disability Type": "",
+    "Age": 0,
+    "State Residing In": "",
   });
+
 
   const [errors, setErrors] = useState({
     contact: "",
     aadhar: "",
   });
 
+  const [recommendedSchemes, setRecommendedSchemes] = useState([]);
+
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      fullName: userName || "",
+    }));
+  }, [userName]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Ensure only numeric input for Contact & Aadhar
-    if (name === "contact" || name === "aadhar") {
-      if (!/^\d*$/.test(value)) {
-        return; // Prevent updating state if non-numeric character is entered
-      }
-    }
+    // Restrict contact & aadhar inputs to only numbers
+    if ((name === "contact" || name === "aadhar") && !/^\d*$/.test(value)) return;
 
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: ["Disability Percentage", "Annual Income", "Age"].includes(name)
+        ?  Number(value) || 0 // Ensure numeric fields are stored as numbers
+        : value,
 
-    // Contact Validation (10 digits)
-    if (name === "contact") {
-      if (!/^\d{10}$/.test(value)) {
-        setErrors((prev) => ({
-          ...prev,
-          contact: "Contact must be a 10-digit number",
-        }));
-      } else {
-        setErrors((prev) => ({ ...prev, contact: "" }));
-      }
-    }
+    }));
 
-    // Aadhar Validation (12 digits)
-    if (name === "aadhar") {
-      if (!/^\d{12}$/.test(value)) {
-        setErrors((prev) => ({
-          ...prev,
-          aadhar: "Aadhar must be a 12-digit number",
-        }));
-      } else {
-        setErrors((prev) => ({ ...prev, aadhar: "" }));
-      }
-    }
+    // Validation errors
+    setErrors((prev) => ({
+      ...prev,
+      contact: name === "contact" && !/^\d{10}$/.test(value) ? "Contact must be a 10-digit number" : "",
+      aadhar: name === "aadhar" && !/^\d{12}$/.test(value) ? "Aadhar must be a 12-digit number" : "",
+    }));
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Final validation check
-    if (errors.contact || errors.aadhar) {
-      alert("Please fix the errors before submitting.");
-      return;
-    }
+    // Convert Disability Type to match API expectations before sending the request
+    const disabilityMapping = {
+      "Hearing": "hearing",
+      "Visual": "visual",
+      "Mental": "mental",
+      "Physical": "physical"
+    };
 
-    console.log("Form Submitted:", formData);
-    // Add API call here if needed
+    const processedData = {
+      ...formData,
+      "Disability Type": disabilityMapping[formData["Disability Type"]] || formData["Disability Type"].toLowerCase()
+    };
+
+    // console.log("Sent Payload:", formData); // Debugging Log
+
+    try {
+      const response = await fetch("http://127.0.0.1:5001/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(processedData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status} ${response.statusText}`);
+      }
+
+      let data;
+      try {
+        data = await response.json();
+      } catch (jsonError) {
+        throw new Error("Invalid JSON response from API");
+      }
+      // console.log("API Response:", data); // Debugging Log
+
+      if (!data || !Array.isArray(data.recommendedSchemes)) {
+        throw new Error("Invalid response structure");
+      }
+
+      navigate("/recommended_schemes", { state: { schemes: data.recommendedSchemes, userData: processedData } });
+
+    } catch (error) {
+      console.error("Error fetching recommendations:", error.message);
+      setRecommendedSchemes([]); 
+    }
   };
+
+
 
   return (
     <div className="eligibility-container">
-      <button className="back-btn" onClick={() => navigate("/home")}>⬅ Back to Home</button>
+      <button className="explore-btn" onClick={() => navigate("/home")}>Back to Home</button>
 
       <h2>Check Your Eligibility</h2>
 
       <form className="eligibility-form" onSubmit={handleSubmit}>
-        
-        {/* Full Name */}
         <div className="form-group">
           <label>Full Name</label>
-          <input type="text" name="fullName" placeholder="Enter full name" value={formData.fullName} onChange={handleChange} required />
+          <input type="text" name="fullName" value={formData.fullName || ""} onChange={handleChange} required />
         </div>
 
-        {/* Contact */}
         <div className="form-group">
           <label>Contact</label>
-          <input type="text" name="contact" placeholder="Enter contact number" value={formData.contact} onChange={handleChange} maxLength="10" required />
+          <input type="text" name="contact" value={formData.contact} onChange={handleChange} maxLength="10" required />
           {errors.contact && <p className="error-text">{errors.contact}</p>}
         </div>
 
-        {/* Aadhar Number */}
         <div className="form-group">
           <label>Aadhar Number</label>
-          <input type="text" name="aadhar" placeholder="Enter Aadhar number" value={formData.aadhar} onChange={handleChange} maxLength="12" required />
+          <input type="text" name="aadhar" value={formData.aadhar} onChange={handleChange} maxLength="12" required />
           {errors.aadhar && <p className="error-text">{errors.aadhar}</p>}
         </div>
 
-        {/* Disability Percentage */}
         <div className="form-group">
           <label>Disability Percentage</label>
-          <input type="number" name="disabilityPercentage" placeholder="Enter percentage" value={formData.disabilityPercentage} onChange={handleChange} required />
+          <input type="number" name="Disability Percentage" value={formData["Disability Percentage"]} onChange={handleChange} required />
         </div>
 
-        {/* Disability Type */}
         <div className="form-group">
           <label>Disability Type</label>
-          <select name="disabilityType" value={formData.disabilityType} onChange={handleChange} required>
+          <select name="Disability Type" value={formData["Disability Type"]} onChange={handleChange} required>
             <option value="">Select</option>
             <option value="Visual">Visual</option>
             <option value="Hearing">Hearing</option>
-            <option value="Locomotor">Locomotor</option>
+            <option value="Physical">Physical</option>
             <option value="Mental">Mental</option>
           </select>
         </div>
 
-        {/* Income */}
         <div className="form-group">
           <label>Annual Income</label>
-          <input type="number" name="income" placeholder="Enter annual income" value={formData.income} onChange={handleChange} required />
+          <input type="number" name="Annual Income" value={formData["Annual Income"]} onChange={handleChange} required />
         </div>
 
-        {/* Age */}
         <div className="form-group">
           <label>Age</label>
-          <input type="number" name="age" placeholder="Enter age" value={formData.age} onChange={handleChange} required />
+          <input type="number" name="Age" value={formData["Age"]} onChange={handleChange} required />
         </div>
 
-        {/* State */}
         <div className="form-group">
-          <label>State</label>
-          <select name="state" value={formData.state} onChange={handleChange} required>
+          <label>State Residing In</label>
+          <select name="State Residing In" value={formData["State Residing In"]} onChange={handleChange} required>
             <option value="">Select</option>
             {statesList.map((state, index) => (
               <option key={index} value={state}>{state}</option>
@@ -151,9 +175,22 @@ const EligibilityForm = ({ userName }) => {
           </select>
         </div>
 
-        {/* Submit Button */}
         <button type="submit" className="explore-btn">Check Eligibility</button>
       </form>
+
+
+      {/* Display Recommended Schemes */}
+      {recommendedSchemes && recommendedSchemes.length > 0 && (
+        <div className="recommendations">
+          <h3>Recommended Schemes:</h3>
+          <ul>
+            {recommendedSchemes.map((scheme, index) => (
+              <li key={index}>{scheme}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
     </div>
   );
 };

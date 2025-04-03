@@ -6,7 +6,7 @@ import "../styles/layout.css";
 const Layout = ({ children }) => {
   const navigate = useNavigate();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [userName, setUserName] = useState(""); // Store user's name
+  const [username, setUserName] = useState(""); // Store user's name
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
 
   // Fetch user data from backend
@@ -34,8 +34,7 @@ const Layout = ({ children }) => {
     fetchUserData();
   }, []);
 
-  console.log("Username in Layout.js: ", userName)
-  const userInitial = userName ? userName.charAt(0).toUpperCase() : "?";
+  const userInitial = username ? username.charAt(0).toUpperCase() : "?";
 
   // Toggle User Menu
   const toggleUserMenu = () => {
@@ -93,7 +92,7 @@ const Layout = ({ children }) => {
 
       <main>
         {React.Children.map(children, (child) =>
-          React.isValidElement(child) ? React.cloneElement(child, { userName }) : child
+          React.isValidElement(child) ? React.cloneElement(child, { username }) : child
         )}
       </main>
 
