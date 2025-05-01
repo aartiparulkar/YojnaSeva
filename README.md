@@ -18,8 +18,10 @@ Yojna Seva is a machine learning project designed to help individuals with disab
 - **React** (for frontend UI)  
 - **MongoDB** (for database storage)  
 
-## Methodology
+## System Design
+- **Methodology**
 ![Image](https://github.com/user-attachments/assets/2d2fd560-311b-45e6-bfbb-351737b9b806)
+- **Scheme Prediction**
 ![Image](https://github.com/user-attachments/assets/6c75fe36-0f88-4130-bf0d-e09c556211a6)
 
 ## Setup & Installation  
