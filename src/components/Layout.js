@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/layout.css";
+import HelpButton from "./HelpButton";
 
 const Layout = ({ children }) => {
   const navigate = useNavigate();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [username, setUserName] = useState(""); // Store user's name
+  const [userName, setUserName] = useState(""); // Store user's name
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
 
   // Fetch user data from backend
@@ -92,13 +93,14 @@ const Layout = ({ children }) => {
 
       <main>
         {React.Children.map(children, (child) =>
-          React.isValidElement(child) ? React.cloneElement(child, { username }) : child
+          React.isValidElement(child) ? React.cloneElement(child, { userName }) : child
         )}
       </main>
 
       <footer className="footer">
         <p>&copy; 2025 SevaYojana. All Rights Reserved.</p>
       </footer>
+      <HelpButton />
     </div>
   );
 };

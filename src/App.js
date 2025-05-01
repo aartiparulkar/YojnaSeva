@@ -8,6 +8,9 @@ import Contact from "./pages/Contact";
 import EligibilityForm from "./pages/Eligibility"; 
 import Layout from "./components/Layout";
 import SchemesPage from "./pages/RecommendSchemes";
+import Profile from "./pages/profile";
+import SchemesPage from "./pages/RecommendedSchemes";
+import SchemesDetails from "./pages/SchemesDetails";
 
 function App() {
   return (
@@ -21,6 +24,10 @@ function App() {
         <Route path="/eligibility" element={ <Layout><EligibilityForm /></Layout> } />
         <Route path="/login" element={ <Login /> } />
         <Route path="/recommended_schemes" element={<SchemesPage />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/recommended_schemes" element={<SchemesPage />} />
+        <Route path="/details" element={<SchemesPage />} />
+        <Route path="/details/:id" element={<SchemesDetails/>} />
       </Routes>
     </Router>
   );

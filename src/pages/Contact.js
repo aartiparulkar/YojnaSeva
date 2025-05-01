@@ -9,7 +9,7 @@ const Contact = ({ userName }) => {
         <h2>Contact Us</h2>
         <p>Email: support@yojanaseva.gov</p>
         <p>Phone: +91 98765 43210</p>
-        <p>Address: 123, Government Scheme Office, New Delhi, India</p>
+        <p>Address: 123, Government Scheme Office, Mumbai, India</p>
       </section>
     </Layout>
   );

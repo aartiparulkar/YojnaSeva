@@ -1,0 +1,94 @@
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 320px;
+  height: 450px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  display: none;
+  flex-direction: column;
+  z-index: 9999; /* Ensure it's above Swiper */
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+.chatbot-container.open {
+  display: flex;
+}
+
+.chat-header {
+  background-color: #009688;
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.chat-window {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.chat-msg {
+  margin-bottom: 10px;
+}
+
+.chat-msg.bot p {
+  background-color: #f1f1f1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-width: 90%;
+}
+
+.chat-msg.user p {
+  background-color: #d1e7dd;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-align: right;
+  max-width: 90%;
+  margin-left: auto;
+}
+
+.options-container {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.chat-option-btn {
+  background-color: #009688;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.chat-option-btn:hover {
+  background-color: #00796b;
+}
+
+.chat-options-inline {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}

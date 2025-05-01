@@ -1,0 +1,105 @@
+.help-button {
+    background-color: #009688; /* Use the primary gradient color from header */
+    color: white;
+    font-size: 24px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .help-button:hover {
+    background-color: #00796b; /* Darker shade of primary color for hover effect */
+  }
+  
+  .chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency to match the body */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    height: 400px;
+    overflow-y: auto;
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    display: none; /* Initially hidden */
+    transition: opacity 0.3s ease-in-out;
+    max-height: 80vh;
+  }
+  
+  .chatbot-container.open {
+    display: block; /* Visible when isOpen is true */
+    opacity: 1;
+  }
+  
+  .chatbot-header {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .close-chat {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #009688; /* Use primary color for close button */
+  }
+  
+  .chatbot-messages {
+    margin-bottom: 10px;
+  }
+  
+  .message {
+    margin-bottom: 10px;
+  }
+  
+  .message.bot p {
+    background-color: #f1f1f1;
+    padding: 8px;
+    border-radius: 8px;
+  }
+  
+  .message.user p {
+    background-color: #d1e7dd;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: right;
+  }
+  
+  .chatbot-input {
+    display: flex;
+    align-items: center;
+  }
+  
+  .chatbot-input input {
+    width: 80%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .chatbot-input button {
+    padding: 8px 12px;
+    background-color: #009688; /* Match the button to header's primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .chatbot-input button:hover {
+    background-color: #00796b; /* Darker shade of primary color for hover effect */
+  }
+  
